@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/models/boarding_model.dart';
+import 'package:shop_app/shared/presentation/bloc/boarding/boarding_bloc.dart';
 
 class BoardingNavigation extends StatelessWidget {
-  const BoardingNavigation({super.key,required this.controller});
+  const BoardingNavigation({
+    super.key,
+    required this.controller,
+  });
 
   final PageController controller;
+
   @override
   Widget build(BuildContext context) {
+    BoardingBloc bloc = context.read();
+    BoardingBloc blocListener = context.watch();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 5.w,
       children: [
-        CustomButton(
-          onPressed: () {
-            controller.previousPage(
-                duration: 1200.ms, curve: Curves.easeInOut);
-          },
-          borderRadius: 10.w,
-          color: Colors.black,
-          textSize: 14,
-          elevation: 3.px,
-          text: 'Back',
-        ),
+        blocListener.pageNum > 0
+            ? CustomButton(
+                onPressed: () {
+                  bloc.add(PreviousBoardingPageEvent());
+                },
+                borderRadius: 10.w,
+                color: AppColors.blackColor,
+                textSize: 14,
+                elevation: 3.px,
+                text: 'Back',
+              )
+            : SizedBox(),
         SmoothPageIndicator(
           controller: controller,
           count: boardingList.length,
@@ -34,20 +41,31 @@ class BoardingNavigation extends StatelessWidget {
             dotWidth: 10.px,
             dotHeight: 10.px,
             dotColor: Colors.grey.shade300,
-            activeDotColor: Colors.deepOrange,
+            activeDotColor: AppColors.mainColor,
           ),
         ),
-        CustomButton(
-          onPressed: () {
-            controller.nextPage(
-                duration: 1200.ms, curve: Curves.easeInOut);
-          },
-          borderRadius: 10.w,
-          color: Colors.black,
-          textSize: 14,
-          elevation: 3.px,
-          text: 'Next',
-        )
+        blocListener.pageNum == 2
+            ? CustomButton(
+                onPressed: () {
+                  bloc.controller.dispose();
+                  navigateWithOutBack(context: context, pageName: 'login', canBack: false);
+                },
+                borderRadius: 10.w,
+                color: AppColors.blackColor,
+                textSize: 16,
+                elevation: 3.px,
+                text: 'Get Started',
+              )
+            : CustomButton(
+                onPressed: () {
+                  bloc.add(NextBoardingPageEvent());
+                },
+                borderRadius: 10.w,
+                color: AppColors.blackColor,
+                textSize: 14,
+                elevation: 3.px,
+                text: 'Next',
+              )
       ],
     );
   }

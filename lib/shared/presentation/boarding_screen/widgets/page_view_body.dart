@@ -24,15 +24,15 @@ class PageViewBody extends StatelessWidget {
               math.exp(-(math.pow((pageOffset.abs() - 0.5), 2) / 0.08));
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 3.h,
+            spacing: 4.h,
             children: [
               Transform.translate(
                 offset: Offset(-32 * gauss * pageOffset.sign, 0),
                 child: CustomImage(
                   assetPath: boardingList[index].image,
                   isNetworkImage: false,
-                  height: 56.h,
-                  width: 100.w,
+                  height: 60.h,
+                  width: 93.w,
                   borderRadius: 20.w,
                   fit: BoxFit.cover,
                 ),

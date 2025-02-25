@@ -17,3 +17,4 @@ export 'package:shop_app/shared/cores/widgets/custom_text_form_field.dart';
 export 'package:shop_app/shared/cores/widgets/horizantol_spacing.dart';
 export 'package:shop_app/shared/cores/widgets/vertical_spacing.dart';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:shop_app/shared/cores/utils/routes.dart';

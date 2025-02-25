@@ -15,7 +15,7 @@ class SkipButton extends StatelessWidget {
           textColor: Colors.orange,
           borderRadius: 10.w,
           text: 'SKIP',
-          padding: EdgeInsets.symmetric(horizontal: 7.w),
+          padding: EdgeInsets.symmetric(horizontal: 5.w,),
           elevation: 3.px,
         ));
   }

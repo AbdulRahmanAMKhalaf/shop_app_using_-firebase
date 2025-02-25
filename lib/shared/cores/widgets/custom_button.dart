@@ -23,6 +23,7 @@ class CustomButton extends StatelessWidget {
   final double elevation;
   final bool isLoading;
   final double textSize;
+  final Color shadowColor;
 
   const CustomButton({
     super.key,
@@ -35,13 +36,15 @@ class CustomButton extends StatelessWidget {
     this.elevation = 2.0, // Default elevation
     this.isLoading = false, // Default loading state
     this.textSize=16,
+    this.shadowColor=Colors.grey,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isLoading ? null : onPressed, // Disable button if loading
+      onPressed: isLoading ? null : onPressed, //// Disable button if loading
       style: ElevatedButton.styleFrom(
+        shadowColor: shadowColor,
         foregroundColor: textColor, backgroundColor: color, // Text color
         padding: padding, // Padding
         shape: RoundedRectangleBorder(

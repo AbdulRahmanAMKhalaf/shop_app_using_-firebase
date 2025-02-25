@@ -41,6 +41,7 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
           fontSize: fontSize.px,
           fontWeight: fontWeight,
+          wordSpacing: -1,
           color: color,
           fontFamily: family),
       textAlign: textAlign,

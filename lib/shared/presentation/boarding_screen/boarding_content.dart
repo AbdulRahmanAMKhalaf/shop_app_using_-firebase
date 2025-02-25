@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/models/boarding_model.dart';
+import 'package:shop_app/shared/presentation/bloc/boarding/boarding_bloc.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/widgets/boarding_navigation.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/widgets/page_view_body.dart';
 
-import 'package:shop_app/shared/presentation/boarding_screen/widgets/skip_button.dart';
 
 class BoardingContent extends StatefulWidget {
   const BoardingContent({super.key});
@@ -15,29 +13,24 @@ class BoardingContent extends StatefulWidget {
 }
 
 class _BoardingContentState extends State<BoardingContent> {
-  late PageController controller;
-
-  @override
-  void initState() {
-    controller = PageController(viewportFraction: 1.15);
-  }
 
   @override
   Widget build(BuildContext context) {
+    BoardingBloc bloc=context.read();
     return SizedBox(
       height: 100.h,
       width: 100.w,
       child: Padding(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(2.w),
         child: Column(
           spacing: 1.h,
           children: [
-            SkipButton(),
+            /*SkipButton(),*/
             PageViewBody(
-              controller: controller,
+              controller: bloc.controller,
             ),
             BoardingNavigation(
-              controller: controller,
+              controller: bloc.controller,
             ),
           ],
         ),
@@ -45,8 +38,4 @@ class _BoardingContentState extends State<BoardingContent> {
     );
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-  }
 }
