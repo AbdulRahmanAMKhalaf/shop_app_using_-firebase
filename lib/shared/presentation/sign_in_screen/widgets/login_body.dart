@@ -9,8 +9,6 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode node1=FocusNode();
-    FocusNode node2=FocusNode();
     LocalizationBloc bloc = context.read();
     LocalizationBloc blocListener = context.watch();
     AuthBloc authBloc = context.read();
@@ -71,11 +69,7 @@ class LoginBody extends StatelessWidget {
               height: 4,
             ),
             CustomTextFormField(
-              onSubmitted: (p0) {
-                FocusScope.of(context).requestFocus(node2);
-              },
               textInputAction: TextInputAction.next,
-              focusNode: node1,
               labelText: 'Email Address',
               keyboardType: TextInputType.emailAddress,
               note: 'abood123@outlook.com',
@@ -90,7 +84,6 @@ class LoginBody extends StatelessWidget {
             ),
             CustomTextFormField(
               labelText: 'Password',
-              focusNode: node2,
               keyboardType: TextInputType.text,
               note: 'Contains:- Cap letters Small - letters - Numbers',
               prefixIcon: Icon(
