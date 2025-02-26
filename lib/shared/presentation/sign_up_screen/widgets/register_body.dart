@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
 import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
 
 class RegisterBody extends StatelessWidget {
@@ -9,6 +10,8 @@ class RegisterBody extends StatelessWidget {
   Widget build(BuildContext context) {
     LocalizationBloc bloc = context.read();
     LocalizationBloc blocListener = context.watch();
+    AuthBloc authBloc = context.read();
+    AuthBloc authBlocListener = context.watch();
     return  Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -64,7 +67,7 @@ class RegisterBody extends StatelessWidget {
             CustomTextFormField(
               labelText: 'Username',
               keyboardType: TextInputType.emailAddress,
-              note: 'AbdulRahman Ayman',
+              hintText: 'AbdulRahman Ayman',
               prefixIcon: Icon(
                 Icons.person,
                 color: AppColors.mainColor,
@@ -75,7 +78,8 @@ class RegisterBody extends StatelessWidget {
             CustomTextFormField(
               labelText: 'Phone Number',
               keyboardType: TextInputType.emailAddress,
-              note: '+962770130018',
+              hintText: '+962 770130018',
+              note: 'Contains:- country key - 9 numbers',
               prefixIcon: Icon(
                 Icons.phone,
                 color: AppColors.mainColor,
@@ -86,7 +90,8 @@ class RegisterBody extends StatelessWidget {
             CustomTextFormField(
               labelText: 'Email Address',
               keyboardType: TextInputType.emailAddress,
-              note: 'abood123@outlook.com',
+              hintText: 'abood123@outlook.com',
+              note: 'Contains:- @',
               prefixIcon: Icon(
                 Icons.email_outlined,
                 color: AppColors.mainColor,
@@ -96,17 +101,26 @@ class RegisterBody extends StatelessWidget {
             VerticalSpacing(height: 3,),
             CustomTextFormField(
               labelText: 'Password',
+              obscureText: authBlocListener.showPassword,
               keyboardType: TextInputType.text,
-              note: 'Contains:- Cap letters Small - letters - Numbers',
+              note: 'Contains:- Cap letters-Small letters-Numbers-8 characters',
               prefixIcon: Icon(
                 Icons.vpn_key_sharp,
                 color: AppColors.mainColor,
                 size: 25.px,
               ),
               suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
+                  onPressed: () {
+                    authBloc.add(ShowPasswordEvent());
+                  },
+                  icon: authBlocListener.showPassword
+                      ? Icon(
                     Icons.remove_red_eye_outlined,
+                    color: Colors.grey,
+                    size: 25.px,
+                  )
+                      : Icon(
+                    Icons.visibility_off,
                     color: Colors.grey,
                     size: 25.px,
                   )),
@@ -122,8 +136,10 @@ class RegisterBody extends StatelessWidget {
                   fontSize: 14,
                 ),
                 Checkbox(
-                  value: false,
-                  onChanged: (value) {},
+                  value: authBlocListener.checkTerms,
+                  onChanged: (value) {
+                    authBloc.add(CheckTermsEvent());
+                  },
                   focusColor: Colors.black,
                   activeColor: AppColors.mainColor,
                 )
@@ -134,14 +150,14 @@ class RegisterBody extends StatelessWidget {
               alignment: Alignment.center,
               child: CustomButton(
                 onPressed: () {},
-                shadowColor: AppColors.mainColor,
-                color: Colors.deepOrange,
+                shadowColor: authBlocListener.checkTerms==true?AppColors.mainColor:Colors.transparent,
+                color: authBlocListener.checkTerms==true?AppColors.mainColor:AppColors.noteColor,
                 padding:
                 EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
                 textSize: 20,
                 elevation: 3.px,
                 borderRadius: 15.px,
-                text: 'Sign Up',
+                text: authBlocListener.checkTerms==true?'Sign Up':'Check Terms Please',
               ),
             ),
             Divider(

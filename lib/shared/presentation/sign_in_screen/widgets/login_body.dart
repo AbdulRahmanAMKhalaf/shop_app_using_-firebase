@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
 import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+    FocusNode node1=FocusNode();
+    FocusNode node2=FocusNode();
     LocalizationBloc bloc = context.read();
     LocalizationBloc blocListener = context.watch();
+    AuthBloc authBloc = context.read();
+    AuthBloc authBlocListener = context.watch();
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -38,7 +44,7 @@ class LoginBody extends StatelessWidget {
                   },
                   child: Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.w),
+                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.w),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.px),
                         border: Border.all(
@@ -48,7 +54,7 @@ class LoginBody extends StatelessWidget {
                       children: [
                         CustomText(
                           text:
-                              blocListener.lang == 'ar' ? 'English' : 'Arabic',
+                          blocListener.lang == 'ar' ? 'English' : 'Arabic',
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -65,6 +71,11 @@ class LoginBody extends StatelessWidget {
               height: 4,
             ),
             CustomTextFormField(
+              onSubmitted: (p0) {
+                FocusScope.of(context).requestFocus(node2);
+              },
+              textInputAction: TextInputAction.next,
+              focusNode: node1,
               labelText: 'Email Address',
               keyboardType: TextInputType.emailAddress,
               note: 'abood123@outlook.com',
@@ -79,6 +90,7 @@ class LoginBody extends StatelessWidget {
             ),
             CustomTextFormField(
               labelText: 'Password',
+              focusNode: node2,
               keyboardType: TextInputType.text,
               note: 'Contains:- Cap letters Small - letters - Numbers',
               prefixIcon: Icon(
@@ -86,10 +98,19 @@ class LoginBody extends StatelessWidget {
                 color: AppColors.mainColor,
                 size: 25.px,
               ),
+              obscureText: authBlocListener.showPassword,
               suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
+                  onPressed: () {
+                    authBloc.add(ShowPasswordEvent());
+                  },
+                  icon: authBlocListener.showPassword
+                      ? Icon(
                     Icons.remove_red_eye_outlined,
+                    color: Colors.grey,
+                    size: 25.px,
+                  )
+                      : Icon(
+                    Icons.visibility_off,
                     color: Colors.grey,
                     size: 25.px,
                   )),
@@ -101,14 +122,16 @@ class LoginBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomText(
-                  text: 'I accept all terms and conditions',
+                  text: 'Remember Me',
                   color: Colors.grey.shade400,
                   fontWeight: FontWeight.w800,
                   fontSize: 14,
                 ),
                 Checkbox(
-                  value: false,
-                  onChanged: (value) {},
+                  value: authBlocListener.checkTerms,
+                  onChanged: (value) {
+                    authBloc.add(CheckTermsEvent());
+                  },
                   focusColor: Colors.black,
                   activeColor: AppColors.mainColor,
                 )
@@ -120,11 +143,11 @@ class LoginBody extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: CustomButton(
-                onPressed: () {},
+                onPressed:() {},
                 shadowColor: AppColors.mainColor,
-                color: Colors.deepOrange,
+                color: AppColors.mainColor,
                 padding:
-                    EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
+                EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
                 textSize: 20,
                 elevation: 3.px,
                 borderRadius: 15.px,

@@ -3,6 +3,7 @@ import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/presentation/bloc/boarding/boarding_bloc.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/widgets/boarding_navigation.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/widgets/page_view_body.dart';
+import 'package:shop_app/shared/presentation/boarding_screen/widgets/skip_button.dart';
 
 
 class BoardingContent extends StatefulWidget {
@@ -25,7 +26,7 @@ class _BoardingContentState extends State<BoardingContent> {
         child: Column(
           spacing: 1.h,
           children: [
-            /*SkipButton(),*/
+            SkipButton(),
             PageViewBody(
               controller: bloc.controller,
             ),

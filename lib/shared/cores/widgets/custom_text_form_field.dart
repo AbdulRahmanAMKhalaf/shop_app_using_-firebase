@@ -13,21 +13,22 @@ class CustomTextFormField extends StatelessWidget {
   final String? family;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final void Function(String)? onSubmitted;
 
-  const CustomTextFormField(
-      {super.key,
-      required this.labelText,
-      this.hintText,
-      this.note,
-      this.obscureText = false,
-      this.controller,
-      this.validator,
-      this.keyboardType = TextInputType.text,
-      this.textInputAction,
-      this.focusNode,
-      this.family,
-      this.suffixIcon,
-      this.prefixIcon});
+  const CustomTextFormField({super.key,
+    required this.labelText,
+    this.hintText,
+    this.note,
+    this.obscureText = false,
+    this.controller,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction,
+    this.focusNode,
+    this.family,
+    this.suffixIcon,
+    this.onSubmitted,
+    this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +53,17 @@ class CustomTextFormField extends StatelessWidget {
             fontFamily: family,
             fontWeight: FontWeight.bold),
         hintText: hintText,
-        helperText: note,
-        helperStyle:TextStyle(
+        hintStyle: TextStyle(
             fontSize: 12,
             color: Colors.grey.shade400,
             fontFamily: family,
-            fontWeight: FontWeight.bold) ,
+            fontWeight: FontWeight.bold),
+        helperText: note,
+        helperStyle: TextStyle(
+            fontSize: 12,
+            color: Colors.grey.shade400,
+            fontFamily: family,
+            fontWeight: FontWeight.bold),
         // Note (helper text)
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -84,6 +90,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
       ),
       validator: validator,
+      onFieldSubmitted:onSubmitted,
     );
   }
 }

@@ -9,13 +9,15 @@ class SkipButton extends StatelessWidget {
     return Align(
         alignment: Alignment.topRight,
         child: CustomButton(
-          onPressed: () {},
+          onPressed: () {
+            navigateTo(context: context, pageName: 'login');
+          },
           color: Colors.black,
           textSize: 14,
-          textColor: Colors.orange,
+          textColor: AppColors.mainColor,
           borderRadius: 10.w,
           text: 'SKIP',
-          padding: EdgeInsets.symmetric(horizontal: 5.w,),
+          padding: EdgeInsets.symmetric(horizontal: 7.w,),
           elevation: 3.px,
         ));
   }

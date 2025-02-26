@@ -31,7 +31,7 @@ class PageViewBody extends StatelessWidget {
                 child: CustomImage(
                   assetPath: boardingList[index].image,
                   isNetworkImage: false,
-                  height: 60.h,
+                  height: 56.h,
                   width: 93.w,
                   borderRadius: 20.w,
                   fit: BoxFit.cover,
