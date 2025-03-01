@@ -13,3 +13,18 @@ final class ShowPasswordLoading extends AuthState {}
 final class CheckTermsSuccessfully extends AuthState {}
 
 final class CheckTermsLoading extends AuthState {}
+
+final class RegisterSuccessfully extends AuthState {}
+
+final class RegisterFail extends AuthState {}
+
+final class RegisterLoading extends AuthState {}
+
+final class LoginSuccessfully extends AuthState {}
+
+final class LoginFail extends AuthState {}
+
+final class LoginLoading extends AuthState {}
+final class SaveDataSuccessfully extends AuthState{}
+final class SaveDataFail extends AuthState{}
+final class SaveDataLoading extends AuthState{}

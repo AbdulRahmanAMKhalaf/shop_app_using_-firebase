@@ -21,6 +21,7 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow overflow;
   final String? family;
+  final TextDecoration? textDecoration;
 
   const CustomText({
     super.key,
@@ -32,6 +33,7 @@ class CustomText extends StatelessWidget {
     this.maxLines, // Optional: Maximum number of lines
     this.overflow = TextOverflow.ellipsis, // Default
     this.family, // overflow behavior
+    this.textDecoration,
   });
 
   @override
@@ -40,7 +42,9 @@ class CustomText extends StatelessWidget {
       text,
       style: TextStyle(
           fontSize: fontSize.px,
+          decoration: textDecoration,
           fontWeight: fontWeight,
+          decorationColor: color,
           wordSpacing: -1,
           color: color,
           fontFamily: family),

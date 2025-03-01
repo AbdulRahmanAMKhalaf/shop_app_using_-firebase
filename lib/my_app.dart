@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
       create: (context) => LocalizationBloc(),
       child: BlocBuilder<LocalizationBloc, LocalizationState>(
         builder: (context, state) {
-          LocalizationBloc blocListener=context.watch();
+          LocalizationBloc blocListener = context.watch();
           return ResponsiveSizer(
             builder: (p0, p1, p2) {
               return MaterialApp(
@@ -34,8 +32,8 @@ class MyApp extends StatelessWidget {
                   //
                   // This works for code too, not just values: Most code changes can be
                   // tested with just a hot reload.
-                  colorScheme: ColorScheme.fromSeed(
-                      seedColor: Colors.deepPurple),
+                  colorScheme:
+                      ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                   useMaterial3: true,
                 ),
                 localizationsDelegates: AppLocalizations.localizationsDelegates,

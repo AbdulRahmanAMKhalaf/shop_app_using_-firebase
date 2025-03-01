@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
 import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
-import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
+import 'package:shop_app/shared/presentation/sign_in_screen/widgets/forget_password_button.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,220 +15,252 @@ class LoginBody extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: 100.w,
-        height: 80.h,
+        height: 70.h,
         padding: EdgeInsets.all(2.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.px),
             color: Colors.white.withValues(alpha: 0.96)),
-        child: ListView(
-          padding: EdgeInsets.all(3.w),
-          children: [
-            Row(
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                CustomText(
-                  text: 'Sign In',
-                  color: AppColors.mainColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  textAlign: TextAlign.start,
-                ),
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    bloc.add(ChangeLanguageEvent());
-                  },
-                  child: Container(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.px),
-                        border: Border.all(
-                            width: 2.px, color: AppColors.mainColor)),
-                    child: Row(
-                      spacing: 3.w,
-                      children: [
-                        CustomText(
-                          text:
-                          blocListener.lang == 'ar' ? 'English' : 'Arabic',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        Icon(
-                          Icons.language,
-                        )
-                      ],
+        child: Form(
+          key: authBloc.formKey,
+          child: ListView(
+            padding: EdgeInsets.all(3.w),
+            children: [
+              Row(
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  CustomText(
+                    text: 'Sign In',
+                    color: AppColors.mainColor,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    textAlign: TextAlign.start,
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      bloc.add(ChangeLanguageEvent());
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.w),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.px),
+                          border: Border.all(
+                              width: 2.px, color: AppColors.mainColor)),
+                      child: Row(
+                        spacing: 3.w,
+                        children: [
+                          CustomText(
+                            text: blocListener.lang == 'ar'
+                                ? 'English'
+                                : 'Arabic',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          Icon(
+                            Icons.language,
+                          )
+                        ],
+                      ),
                     ),
                   ),
+                ],
+              ),
+              VerticalSpacing(
+                height: 4,
+              ),
+              CustomTextFormField(
+                textInputAction: TextInputAction.next,
+                labelText: 'Email Address',
+                controller: authBloc.emailController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Required Field';
+                  } else {
+                    return null;
+                  }
+                },
+                keyboardType: TextInputType.emailAddress,
+                note: 'abood123@outlook.com',
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: AppColors.mainColor,
+                  size: 25.px,
                 ),
-              ],
-            ),
-            VerticalSpacing(
-              height: 4,
-            ),
-            CustomTextFormField(
-              textInputAction: TextInputAction.next,
-              labelText: 'Email Address',
-              keyboardType: TextInputType.emailAddress,
-              note: 'abood123@outlook.com',
-              prefixIcon: Icon(
-                Icons.email_outlined,
-                color: AppColors.mainColor,
-                size: 25.px,
               ),
-            ),
-            VerticalSpacing(
-              height: 3,
-            ),
-            CustomTextFormField(
-              labelText: 'Password',
-              keyboardType: TextInputType.text,
-              note: 'Contains:- Cap letters Small - letters - Numbers',
-              prefixIcon: Icon(
-                Icons.vpn_key_sharp,
-                color: AppColors.mainColor,
-                size: 25.px,
+              VerticalSpacing(
+                height: 2,
               ),
-              obscureText: authBlocListener.showPassword,
-              suffixIcon: IconButton(
+              CustomTextFormField(
+                labelText: 'Password',
+                controller: authBloc.passwordController,
+                keyboardType: TextInputType.text,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Required Field';
+                  } else {
+                    return null;
+                  }
+                },
+                note: 'Contains:- Cap letters Small - letters - Numbers',
+                prefixIcon: Icon(
+                  Icons.vpn_key_sharp,
+                  color: AppColors.mainColor,
+                  size: 25.px,
+                ),
+                obscureText: authBlocListener.showPassword,
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      authBloc.add(ShowPasswordEvent());
+                    },
+                    icon: authBlocListener.showPassword
+                        ? Icon(
+                            Icons.visibility_off_outlined,
+                            color: Colors.grey,
+                            size: 25.px,
+                          )
+                        : Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Colors.grey,
+                            size: 25.px,
+                          )),
+              ),
+              VerticalSpacing(
+                height: 0.3,
+              ),
+              ForgetPasswordButton(),
+              VerticalSpacing(
+                height: 3,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: CustomButton(
                   onPressed: () {
-                    authBloc.add(ShowPasswordEvent());
+                    if (authBloc.formKey.currentState!.validate()) {
+                      authBloc.add(LoginEvent());
+                    }
                   },
-                  icon: authBlocListener.showPassword
-                      ? Icon(
-                    Icons.remove_red_eye_outlined,
-                    color: Colors.grey,
-                    size: 25.px,
-                  )
-                      : Icon(
-                    Icons.visibility_off,
-                    color: Colors.grey,
-                    size: 25.px,
-                  )),
-            ),
-            VerticalSpacing(
-              height: 2,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomText(
-                  text: 'Remember Me',
-                  color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14,
+                  shadowColor: AppColors.mainColor,
+                  color: AppColors.mainColor,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
+                  textSize: 20,
+                  elevation: 3.px,
+                  borderRadius: 15.px,
+                  text: 'Sign In',
                 ),
-                Checkbox(
-                  value: authBlocListener.checkTerms,
-                  onChanged: (value) {
-                    authBloc.add(CheckTermsEvent());
-                  },
-                  focusColor: Colors.black,
-                  activeColor: AppColors.mainColor,
-                )
-              ],
-            ),
-            VerticalSpacing(
-              height: 4,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: CustomButton(
-                onPressed:() {},
-                shadowColor: AppColors.mainColor,
-                color: AppColors.mainColor,
-                padding:
-                EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
-                textSize: 20,
-                elevation: 3.px,
-                borderRadius: 15.px,
-                text: 'Sign In',
               ),
-            ),
-            Divider(
-              thickness: 1,
-              height: 5.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(3.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.px),
-                    border: Border.all(color: AppColors.mainColor, width: 2.px),
+              VerticalSpacing(
+                height: 3,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                      child: Container(
+                    width: double.infinity,
+                    height: 1.px,
+                    color: AppColors.mainColor,
+                    margin: EdgeInsets.only(right: 3.w),
+                  )),
+                  CustomText(
+                    text: 'or login with',
+                    fontSize: 15,
+                    color: AppColors.mainColor,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 3.w,
-                    children: [
-                      CustomImage(
+                  Flexible(
+                      child: Container(
+                    width: double.infinity,
+                    height: 1.px,
+                    color: AppColors.mainColor,
+                    margin: EdgeInsets.only(left: 3.w),
+                  )),
+                ],
+              ),
+              VerticalSpacing(
+                height: 2,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: AppColors.mainColor,
+                        content: CustomText(
+                          text: 'Coming Soon !',
+                          fontSize: 14,
+                          color: AppColors.whiteColor,
+                        ),
+                        duration: Duration(seconds: 2),
+                      ));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(3.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.px),
+                        border:
+                            Border.all(color: AppColors.mainColor, width: 2.px),
+                      ),
+                      child: CustomImage(
                         height: 20.px,
                         width: 20.px,
                         assetPath: AppImages.google,
                         isNetworkImage: false,
                       ),
-                      CustomText(
-                        text: 'Google',
-                        color: AppColors.mainColor,
-                        fontSize: 15,
-                      )
-                    ],
+                    ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(3.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.px),
-                    border: Border.all(color: AppColors.mainColor, width: 2.px),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 3.w,
-                    children: [
-                      CustomImage(
-                        height: 20.px,
-                        width: 20.px,
+                  HorizontalSpacing(width: 15),
+                  InkWell(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: AppColors.mainColor,
+                        content: CustomText(
+                          text: 'Coming Soon !',
+                          fontSize: 14,
+                          color: AppColors.whiteColor,
+                        ),
+                        duration: Duration(seconds: 2),
+                      ));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(3.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.px),
+                        border:
+                            Border.all(color: AppColors.mainColor, width: 2.px),
+                      ),
+                      child: CustomImage(
+                        height: 22.px,
+                        width: 22.px,
                         assetPath: AppImages.faceBook,
                         isNetworkImage: false,
                       ),
-                      CustomText(
-                        text: 'FaceBook',
-                        color: AppColors.mainColor,
-                        fontSize: 15,
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              thickness: 1,
-              height: 5.h,
-            ),
-            VerticalSpacing(
-              height: 3,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 2.w,
-              children: [
-                CustomText(
-                  text: 'Don\'t have an account?',
-                  fontSize: 15,
-                ),
-                TextButton(
-                    onPressed: () {
-                      navigateTo(context: context, pageName: 'register');
-                    },
-                    child: CustomText(
-                      text: 'SignUp Now !',
-                      fontSize: 16,
-                      color: AppColors.mainColor,
-                    ))
-              ],
-            ),
-          ],
+                ],
+              ),
+              Divider(color: AppColors.mainColor,height: 3.h,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 1.w,
+                children: [
+                  CustomText(
+                    text: 'Don\'t have an account?',
+                    fontSize: 15,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        navigateTo(context: context, pageName: 'register');
+                      },
+                      child: CustomText(
+                        text: 'SignUp Now !',
+                        fontSize: 16,
+                        color: AppColors.mainColor,
+                      ))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
