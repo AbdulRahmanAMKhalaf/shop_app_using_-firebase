@@ -236,7 +236,7 @@ class RegisterBody extends StatelessWidget {
                   CustomText(
                     text: 'or register with',
                     fontSize: 15,
-                    color: AppColors.mainColor,
+                    color: AppColors.noteColor,
                   ),
                   Flexible(
                       child: Container(

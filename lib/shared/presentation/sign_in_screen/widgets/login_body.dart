@@ -165,7 +165,7 @@ class LoginBody extends StatelessWidget {
                   CustomText(
                     text: 'or login with',
                     fontSize: 15,
-                    color: AppColors.mainColor,
+                    color: AppColors.noteColor,
                   ),
                   Flexible(
                       child: Container(
