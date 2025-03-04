@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/presentation/sign_in_screen/widgets/login_body.dart';
 
 class SignInContent extends StatelessWidget {

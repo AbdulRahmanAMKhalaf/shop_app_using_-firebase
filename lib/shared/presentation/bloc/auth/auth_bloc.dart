@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
-import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 
 part 'auth_event.dart';
 

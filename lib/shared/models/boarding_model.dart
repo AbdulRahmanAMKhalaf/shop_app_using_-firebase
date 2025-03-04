@@ -1,4 +1,4 @@
-import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 
 class BoardingModel {
   final String text;

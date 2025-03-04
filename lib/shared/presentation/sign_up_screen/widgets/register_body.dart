@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
 import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
 

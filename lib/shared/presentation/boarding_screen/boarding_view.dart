@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/shared/cores/utils/constant/parallel_tool.dart';
+import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/presentation/bloc/boarding/boarding_bloc.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/boarding_content.dart';
 
