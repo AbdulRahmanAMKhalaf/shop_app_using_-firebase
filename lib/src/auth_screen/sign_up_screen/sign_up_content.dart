@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/presentation/sign_up_screen/widgets/register_body.dart';
+import 'package:shop_app/src/auth_screen/sign_up_screen/widgets/register_body.dart';
 
 class SignUpContent extends StatelessWidget {
   const SignUpContent({super.key});

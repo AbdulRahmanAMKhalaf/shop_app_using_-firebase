@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
-import 'package:shop_app/shared/presentation/bloc/localization/localization_bloc.dart';
+import 'package:shop_app/src/bloc/auth/auth_bloc.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({super.key});
@@ -77,9 +75,9 @@ class RegisterBody extends StatelessWidget {
                 hintText: 'AbdulRahman Ayman',
                 note: 'Contains:- Letters-Numbers-Characters',
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return 'Required Field';
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -97,9 +95,9 @@ class RegisterBody extends StatelessWidget {
                 controller: authBloc.phoneNumberController,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return 'Required Field';
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -119,9 +117,9 @@ class RegisterBody extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'abood123@outlook.com',
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return 'Required Field';
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -142,9 +140,9 @@ class RegisterBody extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 controller: authBloc.passwordController,
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return 'Required Field';
-                  }else{
+                  } else {
                     return null;
                   }
                 },
@@ -216,6 +214,7 @@ class RegisterBody extends StatelessWidget {
                   textSize: 20,
                   elevation: 3.px,
                   borderRadius: 15.px,
+                  isText: true,
                   text: authBlocListener.checkTerms == true
                       ? 'Sign Up'
                       : 'Check Terms Please',
@@ -228,11 +227,11 @@ class RegisterBody extends StatelessWidget {
                 children: [
                   Flexible(
                       child: Container(
-                        width: double.infinity,
-                        height: 1.px,
-                        color: AppColors.mainColor,
-                        margin: EdgeInsets.only(right: 3.w),
-                      )),
+                    width: double.infinity,
+                    height: 1.px,
+                    color: AppColors.mainColor,
+                    margin: EdgeInsets.only(right: 3.w),
+                  )),
                   CustomText(
                     text: 'or register with',
                     fontSize: 15,
@@ -240,11 +239,11 @@ class RegisterBody extends StatelessWidget {
                   ),
                   Flexible(
                       child: Container(
-                        width: double.infinity,
-                        height: 1.px,
-                        color: AppColors.mainColor,
-                        margin: EdgeInsets.only(left: 3.w),
-                      )),
+                    width: double.infinity,
+                    height: 1.px,
+                    color: AppColors.mainColor,
+                    margin: EdgeInsets.only(left: 3.w),
+                  )),
                 ],
               ),
               VerticalSpacing(
@@ -270,7 +269,7 @@ class RegisterBody extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.px),
                         border:
-                        Border.all(color: AppColors.mainColor, width: 2.px),
+                            Border.all(color: AppColors.mainColor, width: 2.px),
                       ),
                       child: CustomImage(
                         height: 20.px,
@@ -298,7 +297,7 @@ class RegisterBody extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.px),
                         border:
-                        Border.all(color: AppColors.mainColor, width: 2.px),
+                            Border.all(color: AppColors.mainColor, width: 2.px),
                       ),
                       child: CustomImage(
                         height: 22.px,
@@ -310,7 +309,10 @@ class RegisterBody extends StatelessWidget {
                   ),
                 ],
               ),
-              Divider(color: AppColors.mainColor,height: 3.h,),
+              Divider(
+                color: AppColors.mainColor,
+                height: 3.h,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 1.w,
@@ -324,13 +326,10 @@ class RegisterBody extends StatelessWidget {
                         navigateWithOutBack(
                             context: context, pageName: 'login', canBack: true);
                       },
-                      child: Hero(
-                        tag: 'register1',
-                        child: CustomText(
-                          text: 'SignIn Now !',
-                          fontSize: 16,
-                          color: AppColors.mainColor,
-                        ),
+                      child: CustomText(
+                        text: 'SignIn Now !',
+                        fontSize: 16,
+                        color: AppColors.mainColor,
                       ))
                 ],
               ),

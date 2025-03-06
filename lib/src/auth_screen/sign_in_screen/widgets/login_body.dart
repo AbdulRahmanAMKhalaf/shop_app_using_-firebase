@@ -1,6 +1,6 @@
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/presentation/bloc/auth/auth_bloc.dart';
-import 'package:shop_app/shared/presentation/sign_in_screen/widgets/forget_password_button.dart';
+import 'package:shop_app/src/auth_screen/sign_in_screen/widgets/forget_password_button.dart';
+import 'package:shop_app/src/bloc/auth/auth_bloc.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
@@ -147,6 +147,7 @@ class LoginBody extends StatelessWidget {
                   textSize: 20,
                   elevation: 3.px,
                   borderRadius: 15.px,
+                  isText: true,
                   text: 'Sign In',
                 ),
               ),

@@ -24,6 +24,8 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
   final double textSize;
   final Color shadowColor;
+  final bool isText;
+  final IconData icon;
 
   const CustomButton({
     super.key,
@@ -31,12 +33,15 @@ class CustomButton extends StatelessWidget {
     this.text = "Button", // Default text
     this.color = Colors.blue, // Default background color
     this.textColor = Colors.white, // Default text color
-    this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 24), // Default padding
+    this.padding = const EdgeInsets.symmetric(
+        vertical: 12, horizontal: 24), // Default padding
     this.borderRadius = 8.0, // Default border radius
     this.elevation = 2.0, // Default elevation
     this.isLoading = false, // Default loading state
-    this.textSize=16,
-    this.shadowColor=Colors.grey,
+    this.textSize = 16,
+    this.shadowColor = Colors.grey,
+    required this.isText,
+    this.icon=Icons.add,
   });
 
   @override
@@ -45,8 +50,11 @@ class CustomButton extends StatelessWidget {
       onPressed: isLoading ? null : onPressed, //// Disable button if loading
       style: ElevatedButton.styleFrom(
         shadowColor: shadowColor,
-        foregroundColor: textColor, backgroundColor: color, // Text color
-        padding: padding, // Padding
+        foregroundColor: textColor,
+        backgroundColor: color,
+        // Text color
+        padding: padding,
+        // Padding
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius), // Rounded corners
         ),
@@ -57,14 +65,15 @@ class CustomButton extends StatelessWidget {
         width: 20,
         height: 20,
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(textColor), // Match spinner color to text color
+          valueColor: AlwaysStoppedAnimation<Color>(
+              textColor), // Match spinner color to text color
         ),
       )
-          : Text(
+          : isText ? Text(
         text,
         textAlign: TextAlign.center,
-        style:  TextStyle(fontSize: textSize.px, fontWeight: FontWeight.bold,),
-      ),
+        style: TextStyle(fontSize: textSize.px, fontWeight: FontWeight.bold,),
+      ):Icon(icon,size: 20,color: Colors.white,),
     );
   }
 }

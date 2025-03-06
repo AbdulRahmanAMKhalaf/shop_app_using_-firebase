@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                 locale: Locale(blocListener.lang),
                 routes: myRoutes,
                 debugShowCheckedModeBanner: false,
-                initialRoute: 'home',
+                initialRoute: 'boarding',
               );
             },
           );

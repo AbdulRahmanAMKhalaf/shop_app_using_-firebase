@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/shared/models/user_model.dart';
 
 part 'auth_event.dart';
 
@@ -21,6 +22,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>(
       (event, emit) => _onLoginEvent(event, emit),
     );
+    on<GetDataEvent>(
+      (event, emit) => _onGetData(event, emit),
+    );
   }
 
   bool showPassword = true;
@@ -34,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   late User? user;
+  List<UserModel> usersList = [];
 
   FutureOr<void> _onShowPassword(
       ShowPasswordEvent event, Emitter<AuthState> emit) {
@@ -102,6 +107,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       log('Login by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
       emit(LoginFail());
+    }
+  }
+
+  Future _onGetData(GetDataEvent event, Emitter<AuthState> emit) async {
+    emit(GeTDataLoading());
+    try {
+      // Get a reference to the Firestore collection
+      final QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
+
+      // Convert the documents into a list of User objects
+      final List<UserModel> usersList = querySnapshot.docs.map((doc) {
+        return UserModel.fromFireStore(
+          doc.data() as Map<String, dynamic>,
+        );
+      }).toList();
+      emit(GeTDataSuccessfully());
+      return usersList; // Return the list of User objects
+    } catch (e) {
+      emit(GeTDataFail());
+      print('Error fetching data from FireStore: $e');
+      rethrow; // Re-throw the error for handling elsewhere if needed
     }
   }
 }

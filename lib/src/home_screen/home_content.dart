@@ -1,6 +1,6 @@
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/models/products_model.dart';
-import 'package:shop_app/src/home_screen/widgets/home_categories.dart';
+import 'package:shop_app/shared/models/categories_model.dart';
+
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
@@ -26,21 +26,8 @@ class HomeContent extends StatelessWidget {
         VerticalSpacing(
           height: 2,
         ),
-      
         CustomText(
           text: 'Categories',
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
-        ),
-        VerticalSpacing(
-          height: 2,
-        ),
-        HomeCategoriesList(),
-        VerticalSpacing(
-          height: 2,
-        ),
-        CustomText(
-          text: 'The Best Selling',
           fontSize: 20,
           fontWeight: FontWeight.w800,
         ),
@@ -50,29 +37,33 @@ class HomeContent extends StatelessWidget {
         GridView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: productsList.length,
+          itemCount: categoriesList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, crossAxisSpacing: 4.w, mainAxisSpacing: 4.w),
+              crossAxisCount: 2, crossAxisSpacing: 4.w, mainAxisSpacing: 4.w),
           itemBuilder: (context, index) {
             return InkWell(
-              onTap: () {
-                navigateWithOutBack(
-                    context: context,
-                    pageName: 'details',
-                    canBack: true,
-                    arguments: index);
-              },
+              splashFactory: NoSplash.splashFactory,
+              splashColor: Colors.transparent,
+              onTap: () {},
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: Colors.grey.shade200),
-                padding: EdgeInsets.all(10.w),
-                child: Hero(
-                  tag: 'images$index',
-                  child: CustomImage(
-                    isNetworkImage: false,
-                    assetPath: productsList[index].image,
-                  ),
+                padding: EdgeInsets.all(3.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 2.h,
+                  children: [
+                    CustomImage(
+                      isNetworkImage: false,
+                      assetPath: categoriesList[index].image,
+                    ),
+                    CustomText(
+                      text: categoriesList[index].name,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                    )
+                  ],
                 ),
               ),
             );

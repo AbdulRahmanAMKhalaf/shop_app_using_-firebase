@@ -25,7 +25,6 @@ class _BoardingContentState extends State<BoardingContent> {
         child: Column(
           spacing: 1.h,
           children: [
-            SkipButton(),
             PageViewBody(
               controller: bloc.controller,
             ),

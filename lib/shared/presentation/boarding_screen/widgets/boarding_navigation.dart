@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/models/boarding_model.dart';
 import 'package:shop_app/shared/presentation/bloc/boarding/boarding_bloc.dart';
+import 'package:shop_app/shared/presentation/boarding_screen/widgets/skip_button.dart';
 
 class BoardingNavigation extends StatelessWidget {
   const BoardingNavigation({
@@ -28,9 +28,10 @@ class BoardingNavigation extends StatelessWidget {
                 color: AppColors.blackColor,
                 textSize: 14,
                 elevation: 3.px,
-                text: 'Back',
+                isText: false,
+                icon: Icons.arrow_back,
               )
-            : SizedBox(),
+            : SkipButton(),
         SmoothPageIndicator(
           controller: controller,
           count: boardingList.length,
@@ -48,12 +49,14 @@ class BoardingNavigation extends StatelessWidget {
             ? CustomButton(
                 onPressed: () {
                   bloc.controller.dispose();
-                  navigateWithOutBack(context: context, pageName: 'login', canBack: false);
+                  navigateWithOutBack(
+                      context: context, pageName: 'login', canBack: false);
                 },
                 borderRadius: 10.w,
                 color: AppColors.blackColor,
                 textSize: 16,
                 elevation: 3.px,
+          isText: true,
                 text: 'Get Started',
               )
             : CustomButton(
@@ -64,7 +67,8 @@ class BoardingNavigation extends StatelessWidget {
                 color: AppColors.blackColor,
                 textSize: 14,
                 elevation: 3.px,
-                text: 'Next',
+                isText: false,
+                icon: Icons.arrow_forward,
               )
       ],
     );

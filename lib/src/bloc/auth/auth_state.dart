@@ -25,6 +25,12 @@ final class LoginSuccessfully extends AuthState {}
 final class LoginFail extends AuthState {}
 
 final class LoginLoading extends AuthState {}
-final class SaveDataSuccessfully extends AuthState{}
-final class SaveDataFail extends AuthState{}
-final class SaveDataLoading extends AuthState{}
+
+final class SaveDataSuccessfully extends AuthState {}
+
+final class SaveDataFail extends AuthState {}
+
+final class SaveDataLoading extends AuthState {}
+final class GeTDataSuccessfully extends AuthState{}
+final class GeTDataFail extends AuthState{}
+final class GeTDataLoading extends AuthState{}
