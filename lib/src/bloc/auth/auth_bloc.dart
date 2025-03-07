@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/models/user_model.dart';
 
 part 'auth_event.dart';
 
@@ -22,6 +21,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>(
       (event, emit) => _onLoginEvent(event, emit),
     );
+    on<LogOutEvent>(
+      (event, emit) => _onLogOut(event, emit),
+    );
     on<GetDataEvent>(
       (event, emit) => _onGetData(event, emit),
     );
@@ -37,8 +39,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  QuerySnapshot<Map<String, dynamic>>?getData ;
   late User? user;
-  List<UserModel> usersList = [];
 
   FutureOr<void> _onShowPassword(
       ShowPasswordEvent event, Emitter<AuthState> emit) {
@@ -110,25 +112,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future _onGetData(GetDataEvent event, Emitter<AuthState> emit) async {
+  FutureOr<void> _onLogOut(LogOutEvent event, Emitter<AuthState> emit) async {
+    emit(LogOutLoading());
+    try {
+      await firebaseAuth.signOut();
+
+      emit(LogOutSuccessfully());
+    } on FirebaseAuthException catch (e) {
+      // Handle errors
+      String? errorMessage = 'An error occurred. Please try again.';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Wrong password provided for that user.';
+      } else {
+        errorMessage = e.message;
+      }
+      log('Login by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
+      emit(LogOutFail());
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>?> _onGetData(GetDataEvent event, Emitter<AuthState> emit) async {
     emit(GeTDataLoading());
     try {
-      // Get a reference to the Firestore collection
-      final QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection('users').get();
+      getData =await fireStore.collection('users')
+            .where('email', isEqualTo:emailController.text).get();
 
-      // Convert the documents into a list of User objects
-      final List<UserModel> usersList = querySnapshot.docs.map((doc) {
-        return UserModel.fromFireStore(
-          doc.data() as Map<String, dynamic>,
-        );
-      }).toList();
+      log('=========================================> ${getData?.docs.toString()}');
       emit(GeTDataSuccessfully());
-      return usersList; // Return the list of User objects
+      return getData; // Return the list of User objects
     } catch (e) {
-      emit(GeTDataFail());
       print('Error fetching data from FireStore: $e');
-      rethrow; // Re-throw the error for handling elsewhere if needed
+      emit(GeTDataFail());
     }
   }
 }

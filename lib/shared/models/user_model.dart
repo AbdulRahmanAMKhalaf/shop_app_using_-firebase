@@ -12,7 +12,7 @@ class UserModel {
 
   factory UserModel.fromFireStore(Map<String, dynamic> data) {
     return UserModel(
-        name: data['email'],
+        name: data['fullName'],
         phoneNumber: data['phoneNumber'],
         email: data['email'],
         id: data['id']);

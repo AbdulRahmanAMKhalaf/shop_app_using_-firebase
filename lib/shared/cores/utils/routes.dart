@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/shared/presentation/boarding_screen/boarding_view.dart';
 import 'package:shop_app/src/auth_screen/sign_in_screen/sign_in_view.dart';
 import 'package:shop_app/src/auth_screen/sign_up_screen/sign_up_view.dart';
+import 'package:shop_app/src/details_screen/details_view.dart';
 import 'package:shop_app/src/home_screen/home_view.dart';
 import 'package:shop_app/src/setting/setting_view.dart';
 
@@ -10,8 +11,8 @@ Map<String, WidgetBuilder> myRoutes = {
   'login': (context) => SignInView(),
   'register': (context) => SignUpView(),
   'home': (context) => HomeView(),
-  'settings':(context)=>SettingView()
-  /*'details': (context) => DetailsView()*/
+  'settings':(context)=>SettingView(),
+  'details': (context) => DetailsView(),
 };
 
 void navigateTo({required BuildContext context, required String pageName}) {

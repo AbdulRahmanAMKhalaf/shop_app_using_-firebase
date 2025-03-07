@@ -1,31 +1,16 @@
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/src/bloc/auth/auth_bloc.dart';
 
 class SettingContent extends StatelessWidget {
   const SettingContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthBloc bloc = context.read();
+    AuthBloc homeBloc = context.read();
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: IconButton(
-              onPressed: () {
-                navigateBack(context: context);
-              },
-              style: ButtonStyle(
-                splashFactory: NoSplash.splashFactory
-              ),
-              color: Colors.transparent,
-              padding: EdgeInsets.only(top: 2.w),
-              icon: Icon(
-                Icons.arrow_back,
-                size: 25,
-                color: Colors.black,
-              )),
-        ),
-
         /// ----------- AM ------------ ///
         Container(
           padding: EdgeInsets.all(6.w),
@@ -521,10 +506,16 @@ class SettingContent extends StatelessWidget {
         SizedBox(
           height: 3.h,
         ),
-        /*MyButton(text: 'Log Out', onPressed: () {},),*/
-        SizedBox(
-          height: 2.h,
+        CustomButton(
+          borderRadius: 20,
+          onPressed: () {
+            bloc.add(LogOutEvent());
+          },
+          isText: true,
+          text: 'Log Out',
+          color: AppColors.mainColor,
         ),
+        VerticalSpacing(height: 4,),
       ],
     );
   }
