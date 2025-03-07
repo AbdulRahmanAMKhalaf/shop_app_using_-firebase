@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
+import 'package:shop_app/shared/models/user_model.dart';
+import 'package:shop_app/src/bloc/home/home_bloc.dart';
 
 part 'auth_event.dart';
 
@@ -24,9 +26,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogOutEvent>(
       (event, emit) => _onLogOut(event, emit),
     );
-    on<GetDataEvent>(
-      (event, emit) => _onGetData(event, emit),
-    );
   }
 
   bool showPassword = true;
@@ -39,9 +38,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  QuerySnapshot<Map<String, dynamic>>?getData ;
   late User? user;
-
+  HomeBloc ?homeBloc;
   FutureOr<void> _onShowPassword(
       ShowPasswordEvent event, Emitter<AuthState> emit) {
     emit(ShowPasswordLoading());
@@ -95,7 +93,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       userCredential = await firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-
       emit(LoginSuccessfully());
     } on FirebaseAuthException catch (e) {
       // Handle errors
@@ -130,21 +127,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       log('Login by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
       emit(LogOutFail());
-    }
-  }
-
-  Future<QuerySnapshot<Map<String, dynamic>>?> _onGetData(GetDataEvent event, Emitter<AuthState> emit) async {
-    emit(GeTDataLoading());
-    try {
-      getData =await fireStore.collection('users')
-            .where('email', isEqualTo:emailController.text).get();
-
-      log('=========================================> ${getData?.docs.toString()}');
-      emit(GeTDataSuccessfully());
-      return getData; // Return the list of User objects
-    } catch (e) {
-      print('Error fetching data from FireStore: $e');
-      emit(GeTDataFail());
     }
   }
 }

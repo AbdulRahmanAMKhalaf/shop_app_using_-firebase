@@ -24,7 +24,7 @@ class SignInView extends StatelessWidget {
                 backgroundColor: Colors.green,
               ));
               navigateWithOutBack(
-                  context: context, pageName: 'home', canBack: false);
+                  context: context, pageName: 'home', canBack: false,arguments: context.read<AuthBloc>().userCredential.user!.uid);
             }
           },
           child: SignInContent(),

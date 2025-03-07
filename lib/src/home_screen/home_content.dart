@@ -2,21 +2,43 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
 import 'package:shop_app/shared/models/categories_model.dart';
 import 'package:shop_app/shared/models/products_model.dart';
-import 'package:shop_app/src/bloc/auth/auth_bloc.dart';
+import 'package:shop_app/src/bloc/home/home_bloc.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthBloc blocListener = context.watch();
-    return blocListener.getData!.docs.isEmpty
-        ? Center(child: CircularProgressIndicator(color: AppColors.mainColor,))
+    HomeBloc blocListener = context.watch();
+    return blocListener.state is GeTDataLoading
+        ? Center(
+            child: CircularProgressIndicator(
+            color: AppColors.mainColor,
+          ))
         : ListView(
             padding: EdgeInsets.all(3.w),
             children: [
+              Row(
+                children: [
+                  CustomText(
+                    text: 'Hello,\n${blocListener.userModel?.name}',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        navigateWithOutBack(context: context, pageName: 'settings', canBack: true,arguments: blocListener.uid);
+                      },
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.black,
+                        size: 25,
+                      ))
+                ],
+              ),
               VerticalSpacing(
-                height: 1,
+                height: 2,
               ),
               CustomTextFormField(
                 labelText: 'Search',
