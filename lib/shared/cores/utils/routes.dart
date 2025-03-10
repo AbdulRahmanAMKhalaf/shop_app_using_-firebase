@@ -11,7 +11,7 @@ Map<String, WidgetBuilder> myRoutes = {
   'login': (context) => SignInView(),
   'register': (context) => SignUpView(),
   'home': (context) => HomeView(),
-  'settings':(context)=>SettingView(),
+  'settings': (context) => SettingView(),
   'details': (context) => DetailsView(),
 };
 
@@ -22,14 +22,16 @@ void navigateTo({required BuildContext context, required String pageName}) {
   );
 }
 
-void navigateWithOutBack({required BuildContext context,
-  required String pageName,
-  Object? arguments,
-  required bool canBack}) {
+void navigateWithOutBack(
+    {required BuildContext context,
+    required String pageName,
+    Object? arguments,
+    required bool canBack}) {
   Navigator.pushNamedAndRemoveUntil(
-    context, arguments: arguments,
+    context,
+    arguments: arguments,
     pageName,
-        (route) => canBack,
+    (route) => canBack,
   );
 }
 

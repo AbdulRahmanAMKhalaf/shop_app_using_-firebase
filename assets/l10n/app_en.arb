@@ -1,0 +1,19 @@
+{
+  "email": "Email Address",
+  "password": "Password",
+  "forget": "Forget Password",
+  "signIn": "Sign In",
+  "dontHave": "Don't have an account?",
+  "signUpNow": "SignUp Now!",
+  "phone": "Phone Number",
+  "username": "Username",
+  "terms": "I accept all terms ",
+  "checkTerms": "Check Terms Please",
+  "haveAccount": "Have an account?",
+  "skip": "SKIP",
+  "getStarted": "Get Started",
+  "hello": "Hello",
+  "search": "Search",
+  "searchAbout": "search about what you need",
+  "categories": "Categories"
+}

@@ -34,7 +34,7 @@ class BoardingNavigation extends StatelessWidget {
             : SkipButton(),
         SmoothPageIndicator(
           controller: controller,
-          count: boardingList.length,
+          count: arabicBoardingList.length,
           axisDirection: Axis.horizontal,
           effect: ScrollingDotsEffect(
             spacing: 12.px,
@@ -57,7 +57,7 @@ class BoardingNavigation extends StatelessWidget {
                 textSize: 16,
                 elevation: 3.px,
           isText: true,
-                text: 'Get Started',
+                text: AppLocalizations.of(context)!.getStarted,
               )
             : CustomButton(
                 onPressed: () {

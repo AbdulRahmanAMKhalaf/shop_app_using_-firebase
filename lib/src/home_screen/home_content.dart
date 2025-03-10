@@ -21,14 +21,19 @@ class HomeContent extends StatelessWidget {
               Row(
                 children: [
                   CustomText(
-                    text: 'Hello,\n${blocListener.userModel?.name}',
+                    text:
+                        '${AppLocalizations.of(context)!.hello},\n${blocListener.userModel?.name}',
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                   ),
                   Spacer(),
                   IconButton(
                       onPressed: () {
-                        navigateWithOutBack(context: context, pageName: 'settings', canBack: true,arguments: blocListener.uid);
+                        navigateWithOutBack(
+                            context: context,
+                            pageName: 'settings',
+                            canBack: true,
+                            arguments: blocListener.uid);
                       },
                       icon: Icon(
                         Icons.settings,
@@ -41,8 +46,8 @@ class HomeContent extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
-                labelText: 'Search',
-                hintText: 'search about what you need',
+                labelText: AppLocalizations.of(context)!.search,
+                hintText: AppLocalizations.of(context)!.searchAbout,
                 keyboardType: TextInputType.text,
                 prefixIcon: Icon(
                   Icons.search,
@@ -54,7 +59,7 @@ class HomeContent extends StatelessWidget {
                 height: 2,
               ),
               CustomText(
-                text: 'Categories',
+                text: AppLocalizations.of(context)!.categories,
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
               ),
@@ -64,7 +69,7 @@ class HomeContent extends StatelessWidget {
               GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: categoriesList.length,
+                itemCount: arabicCategoriesList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 4.w,
@@ -76,11 +81,20 @@ class HomeContent extends StatelessWidget {
                     splashColor: Colors.transparent,
                     onTap: () {
                       if (index == 0) {
-                        sendingList = groceriesList;
+                        sendingList =
+                            AppLocalizations.of(context)!.localeName == 'ar'
+                                ? arabicGroceriesList
+                                : englishGroceriesList;
                       } else if (index == 1) {
-                        sendingList = electronicsList;
+                        sendingList =
+                            AppLocalizations.of(context)!.localeName == 'ar'
+                                ? arabicElectronicsList
+                                : englishElectronicsList;
                       } else if (index == 2) {
-                        sendingList = clothesList;
+                        sendingList =
+                            AppLocalizations.of(context)!.localeName == 'ar'
+                                ? arabicClothesList
+                                : englishClothesList;
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -112,10 +126,10 @@ class HomeContent extends StatelessWidget {
                         children: [
                           CustomImage(
                             isNetworkImage: false,
-                            assetPath: categoriesList[index].image,
+                            assetPath: arabicCategoriesList[index].image,
                           ),
                           CustomText(
-                            text: categoriesList[index].name,
+                            text: arabicCategoriesList[index].name,
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                           )

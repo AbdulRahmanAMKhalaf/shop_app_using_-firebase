@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:shop_app/shared/cores/utils/parallel_tool.dart';
-import 'package:shop_app/shared/models/user_model.dart';
 import 'package:shop_app/src/bloc/home/home_bloc.dart';
 
 part 'auth_event.dart';
@@ -26,12 +25,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogOutEvent>(
       (event, emit) => _onLogOut(event, emit),
     );
+    on<VerificationEvent>(
+      (event, emit) => _onVerificationEvent(event, emit, user!),
+    );
   }
 
   bool showPassword = true;
   bool checkTerms = false;
   var formKey = GlobalKey<FormState>();
-  late UserCredential userCredential;
+   UserCredential ?userCredential;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
   TextEditingController emailController = TextEditingController();
@@ -39,7 +41,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   late User? user;
-  HomeBloc ?homeBloc;
+  HomeBloc? homeBloc;
+
   FutureOr<void> _onShowPassword(
       ShowPasswordEvent event, Emitter<AuthState> emit) {
     emit(ShowPasswordLoading());
@@ -59,7 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       userCredential = await firebaseAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      user = userCredential.user;
+      user = userCredential!.user;
       if (user != null) {
         emit(SaveDataLoading());
         await fireStore.collection('users').doc(user!.uid).set({
@@ -73,6 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         });
       }
       emit(RegisterSuccessfully());
+      _onVerificationEvent(VerificationEvent(), emit, user!);
     } on FirebaseAuthException catch (e) {
       String errorMessage = 'An error occurred';
       if (e.code == 'weak-password') {
@@ -82,8 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         errorMessage = e.message!;
       }
-      log('Register by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
-      emit(RegisterFail());
+      emit(RegisterFail(message: errorMessage.toString()));
     }
   }
 
@@ -104,8 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         errorMessage = e.message;
       }
-      log('Login by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
-      emit(LoginFail());
+      emit(LoginFail(message: errorMessage.toString()));
     }
   }
 
@@ -125,8 +127,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         errorMessage = e.message;
       }
-      log('Login by -------${userCredential.user!.email}------- was Fail because $errorMessage ');
-      emit(LogOutFail());
+      emit(LogOutFail(message: errorMessage.toString()));
+    }
+  }
+
+  FutureOr<void> _onVerificationEvent(
+      VerificationEvent event, Emitter<AuthState> emit, User user) async {
+    emit(EmailVerificationLoading());
+    try {
+      user = FirebaseAuth.instance.currentUser!;
+
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+        log("Email verification link sent to ${user.email}");
+      } else {
+        log("User is already verified or no user is logged in.");
+      }
+      emit(EmailVerificationSuccessfully());
+    } catch (e) {
+      log("Error sending email verification: $e");
+      emit(EmailVerificationFail(message: e.toString()));
     }
   }
 }

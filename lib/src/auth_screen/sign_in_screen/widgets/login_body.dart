@@ -15,7 +15,7 @@ class LoginBody extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: 100.w,
-        height: 70.h,
+        height: 60.h,
         padding: EdgeInsets.all(2.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.px),
@@ -29,7 +29,7 @@ class LoginBody extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   CustomText(
-                    text: 'Sign In',
+                    text: AppLocalizations.of(context)!.signIn,
                     color: AppColors.mainColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
@@ -53,7 +53,7 @@ class LoginBody extends StatelessWidget {
                           CustomText(
                             text: blocListener.lang == 'ar'
                                 ? 'English'
-                                : 'Arabic',
+                                : 'عربي',
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
                           ),
@@ -71,7 +71,7 @@ class LoginBody extends StatelessWidget {
               ),
               CustomTextFormField(
                 textInputAction: TextInputAction.next,
-                labelText: 'Email Address',
+                labelText: AppLocalizations.of(context)!.email,
                 controller: authBloc.emailController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -92,7 +92,7 @@ class LoginBody extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
-                labelText: 'Password',
+                labelText: AppLocalizations.of(context)!.password,
                 controller: authBloc.passwordController,
                 keyboardType: TextInputType.text,
                 validator: (value) {
@@ -148,13 +148,13 @@ class LoginBody extends StatelessWidget {
                   elevation: 3.px,
                   borderRadius: 15.px,
                   isText: true,
-                  text: 'Sign In',
+                  text: AppLocalizations.of(context)!.signIn,
                 ),
               ),
               VerticalSpacing(
                 height: 3,
               ),
-              Row(
+             /* Row(
                 children: [
                   Flexible(
                       child: Container(
@@ -239,14 +239,14 @@ class LoginBody extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ),*/
               Divider(color: AppColors.mainColor,height: 3.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 1.w,
                 children: [
                   CustomText(
-                    text: 'Don\'t have an account?',
+                    text: AppLocalizations.of(context)!.dontHave,
                     fontSize: 15,
                   ),
                   TextButton(
@@ -254,7 +254,7 @@ class LoginBody extends StatelessWidget {
                         navigateTo(context: context, pageName: 'register');
                       },
                       child: CustomText(
-                        text: 'SignUp Now !',
+                        text: AppLocalizations.of(context)!.signUpNow,
                         fontSize: 16,
                         color: AppColors.mainColor,
                       ))

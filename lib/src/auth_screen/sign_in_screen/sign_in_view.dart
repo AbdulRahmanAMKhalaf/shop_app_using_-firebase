@@ -24,7 +24,18 @@ class SignInView extends StatelessWidget {
                 backgroundColor: Colors.green,
               ));
               navigateWithOutBack(
-                  context: context, pageName: 'home', canBack: false,arguments: context.read<AuthBloc>().userCredential.user!.uid);
+                  context: context, pageName: 'home', canBack: false,arguments: context.read<AuthBloc>().userCredential!.user!.uid);
+            }else if(state is LoginFail){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                duration: 3.seconds,
+                content: CustomText(
+                  text: state.message,
+                  maxLines: 3,
+                  fontSize: 13,
+                  color: AppColors.whiteColor,
+                ),
+                backgroundColor: Colors.red,
+              ));
             }
           },
           child: SignInContent(),

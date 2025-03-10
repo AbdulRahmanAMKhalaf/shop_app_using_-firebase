@@ -14,7 +14,7 @@ class RegisterBody extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: 100.w,
-        height: 85.h,
+        height: 81.h,
         padding: EdgeInsets.all(2.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.px),
@@ -28,7 +28,7 @@ class RegisterBody extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   CustomText(
-                    text: 'Sign Up',
+                    text: AppLocalizations.of(context)!.signUpNow,
                     color: AppColors.mainColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
@@ -52,7 +52,7 @@ class RegisterBody extends StatelessWidget {
                           CustomText(
                             text: blocListener.lang == 'ar'
                                 ? 'English'
-                                : 'Arabic',
+                                : 'عربي',
                             fontSize: 15,
                             fontWeight: FontWeight.w700,
                           ),
@@ -69,7 +69,7 @@ class RegisterBody extends StatelessWidget {
                 height: 4,
               ),
               CustomTextFormField(
-                labelText: 'Username',
+                labelText: AppLocalizations.of(context)!.username,
                 keyboardType: TextInputType.emailAddress,
                 controller: authBloc.nameController,
                 hintText: 'AbdulRahman Ayman',
@@ -91,7 +91,7 @@ class RegisterBody extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
-                labelText: 'Phone Number',
+                labelText: AppLocalizations.of(context)!.phone,
                 controller: authBloc.phoneNumberController,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
@@ -113,7 +113,7 @@ class RegisterBody extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
-                labelText: 'Email Address',
+                labelText: AppLocalizations.of(context)!.email,
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'abood123@outlook.com',
                 validator: (value) {
@@ -135,7 +135,7 @@ class RegisterBody extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
-                labelText: 'Password',
+                labelText: AppLocalizations.of(context)!.password,
                 obscureText: authBlocListener.showPassword,
                 keyboardType: TextInputType.text,
                 controller: authBloc.passwordController,
@@ -176,7 +176,7 @@ class RegisterBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CustomText(
-                    text: 'I accept all terms and conditions',
+                    text: AppLocalizations.of(context)!.terms,
                     color: Colors.grey.shade400,
                     fontWeight: FontWeight.w800,
                     fontSize: 14,
@@ -216,14 +216,14 @@ class RegisterBody extends StatelessWidget {
                   borderRadius: 15.px,
                   isText: true,
                   text: authBlocListener.checkTerms == true
-                      ? 'Sign Up'
-                      : 'Check Terms Please',
+                      ? AppLocalizations.of(context)!.signUpNow
+                      : AppLocalizations.of(context)!.checkTerms,
                 ),
               ),
               VerticalSpacing(
                 height: 3,
               ),
-              Row(
+            /*  Row(
                 children: [
                   Flexible(
                       child: Container(
@@ -308,7 +308,7 @@ class RegisterBody extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ),*/
               Divider(
                 color: AppColors.mainColor,
                 height: 3.h,
@@ -318,7 +318,7 @@ class RegisterBody extends StatelessWidget {
                 spacing: 1.w,
                 children: [
                   CustomText(
-                    text: 'Have an account?',
+                    text: AppLocalizations.of(context)!.haveAccount,
                     fontSize: 15,
                   ),
                   TextButton(
@@ -327,7 +327,7 @@ class RegisterBody extends StatelessWidget {
                             context: context, pageName: 'login', canBack: true);
                       },
                       child: CustomText(
-                        text: 'SignIn Now !',
+                        text: AppLocalizations.of(context)!.signIn,
                         fontSize: 16,
                         color: AppColors.mainColor,
                       ))

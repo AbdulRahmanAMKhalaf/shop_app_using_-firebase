@@ -28,7 +28,7 @@ class PageViewBody extends StatelessWidget {
               Transform.translate(
                 offset: Offset(-32 * gauss * pageOffset.sign, 0),
                 child: CustomImage(
-                  assetPath: boardingList[index].image,
+                  assetPath: arabicBoardingList[index].image,
                   isNetworkImage: false,
                   height: 60.h,
                   width: 93.w,
@@ -42,7 +42,7 @@ class PageViewBody extends StatelessWidget {
                 color: Colors.grey.shade300,
               ),
               CustomText(
-                text: boardingList[index].text,
+                text: englishBoardingList[index].text,
                 fontWeight: FontWeight.w900,
                 textAlign: TextAlign.center,
                 maxLines: 4,
@@ -52,7 +52,7 @@ class PageViewBody extends StatelessWidget {
           );
         },
       ),
-      itemCount: boardingList.length,
+      itemCount: arabicBoardingList.length,
       controller: controller,
     ));
   }

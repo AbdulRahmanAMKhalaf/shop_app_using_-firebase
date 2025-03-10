@@ -17,6 +17,5 @@ abstract class AppImages {
   static final tShirts = 'assets/images/tshirt.png';
   static final laptop = 'assets/images/laptop.png';
   static final jeans = 'assets/images/jeans.png';
-  static final banner1 = 'assets/images/banner1.jpg';
-  static final banner2 = 'assets/images/banner2.png';
+  static final String verification = 'assets/images/Designer.png';
 }

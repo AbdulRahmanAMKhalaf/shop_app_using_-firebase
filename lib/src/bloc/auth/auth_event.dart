@@ -11,3 +11,4 @@ final class RegisterEvent extends AuthEvent {}
 final class LoginEvent extends AuthEvent {}
 
 final class LogOutEvent extends AuthEvent {}
+final class VerificationEvent extends AuthEvent{}

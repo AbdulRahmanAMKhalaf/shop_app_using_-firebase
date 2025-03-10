@@ -16,24 +16,50 @@ final class CheckTermsLoading extends AuthState {}
 
 final class RegisterSuccessfully extends AuthState {}
 
-final class RegisterFail extends AuthState {}
+final class RegisterFail extends AuthState {
+  final String message;
+
+  RegisterFail({required this.message});
+}
 
 final class RegisterLoading extends AuthState {}
 
 final class LoginSuccessfully extends AuthState {}
 
-final class LoginFail extends AuthState {}
+final class LoginFail extends AuthState {
+  final String message;
+
+  LoginFail({required this.message});
+}
 
 final class LoginLoading extends AuthState {}
 
 final class SaveDataSuccessfully extends AuthState {}
 
-final class SaveDataFail extends AuthState {}
+final class SaveDataFail extends AuthState {
+  final String message;
+
+  SaveDataFail({required this.message});
+}
 
 final class SaveDataLoading extends AuthState {}
 
 final class LogOutSuccessfully extends AuthState {}
 
-final class LogOutFail extends AuthState {}
+final class LogOutFail extends AuthState {
+  final String message;
+
+  LogOutFail({required this.message});
+}
 
 final class LogOutLoading extends AuthState {}
+
+final class EmailVerificationLoading extends AuthState {}
+
+final class EmailVerificationSuccessfully extends AuthState {}
+
+final class EmailVerificationFail extends AuthState {
+  final String message;
+
+  EmailVerificationFail({required this.message});
+}
