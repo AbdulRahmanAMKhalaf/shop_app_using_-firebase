@@ -20,7 +20,7 @@ class SignUpView extends StatelessWidget {
                   color: AppColors.whiteColor,
 
                 ),backgroundColor: Colors.green,));
-              navigateTo(context: context, pageName: 'verification');
+              navigateTo(context: context, pageName: 'login');
             }else if(state is RegisterFail){
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: CustomText(

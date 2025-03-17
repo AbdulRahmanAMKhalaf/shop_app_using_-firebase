@@ -12,7 +12,7 @@ List<BoardingModel>englishBoardingList=[
   BoardingModel(text: 'No limits, no boundaries\nWe’ve got you covered around the clock\nand across the globe!', image: AppImages.service),
 ];
 List<BoardingModel>arabicBoardingList=[
-  BoardingModel(text: 'من الألف إلى الياء، لدينا كل شيء اكتشف إمكانيات لا نهاية لها معنا!', image: AppImages.buying),
-  BoardingModel(text: 'أمنك هو أولويتنا. استمتع بمعاملات خالية من القلق اليوم!', image: AppImages.secure),
-  BoardingModel(text: 'لا حدود، لا قيود. نحن نغطيك على مدار الساعة وفي جميع أنحاء العالم!', image: AppImages.service),
+  BoardingModel(text: 'من الألف إلى الياء، لدينا كل شيء\nاكتشف إمكانيات لا نهاية لها معنا!', image: AppImages.buying),
+  BoardingModel(text: 'أمنك هو أولويتنا.\nاستمتع بمعاملات خالية من القلق اليوم!', image: AppImages.secure),
+  BoardingModel(text: 'لا حدود، لا قيود.\nنحن نغطيك على مدار الساعة وفي جميع أنحاء العالم!', image: AppImages.service),
 ];

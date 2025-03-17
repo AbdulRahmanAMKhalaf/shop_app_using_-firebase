@@ -15,5 +15,6 @@
   "hello": "Hello",
   "search": "Search",
   "searchAbout": "search about what you need",
-  "categories": "Categories"
+  "categories": "Categories",
+  "work": "Work"
 }

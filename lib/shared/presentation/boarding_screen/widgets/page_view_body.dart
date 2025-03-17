@@ -30,7 +30,7 @@ class PageViewBody extends StatelessWidget {
                 child: CustomImage(
                   assetPath: arabicBoardingList[index].image,
                   isNetworkImage: false,
-                  height: 60.h,
+                  height: 55.h,
                   width: 93.w,
                   borderRadius: 20.w,
                   fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class PageViewBody extends StatelessWidget {
                 color: Colors.grey.shade300,
               ),
               CustomText(
-                text: englishBoardingList[index].text,
+                text: AppLocalizations.of(context)!.localeName=='ar'?arabicBoardingList[index].text:englishBoardingList[index].text,
                 fontWeight: FontWeight.w900,
                 textAlign: TextAlign.center,
                 maxLines: 4,

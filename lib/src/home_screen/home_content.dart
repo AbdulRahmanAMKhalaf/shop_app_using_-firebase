@@ -129,7 +129,7 @@ class HomeContent extends StatelessWidget {
                             assetPath: arabicCategoriesList[index].image,
                           ),
                           CustomText(
-                            text: arabicCategoriesList[index].name,
+                            text: AppLocalizations.of(context)!.localeName=='ar'?arabicCategoriesList[index].name:englishCategoriesList[index].name,
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                           )

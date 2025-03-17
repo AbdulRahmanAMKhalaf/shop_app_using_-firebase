@@ -9,29 +9,26 @@ class SettingContent extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthBloc authBloc = context.read();
     HomeBloc homeBloc = context.watch();
+    LocalizationBloc bloc = context.read();
+    LocalizationBloc blocListener = context.watch();
     return homeBloc.state is! GeTDataSuccessfully
         ? Center(
-          child: CircularProgressIndicator(
+            child: CircularProgressIndicator(
               color: AppColors.mainColor,
             ),
-        )
+          )
         : ListView(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
             children: [
-              /// ----------- AM ------------ ///
               Container(
                 padding: EdgeInsets.all(6.w),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: [Colors.deepOrange, Colors.grey.shade200]),
                     shape: BoxShape.circle),
-                child: Text(
-                  'AM',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 50.px,
-                      fontWeight: FontWeight.w800),
+                child: Icon(
+                  Icons.person,
+                  size: 50,
                 ),
               ),
               SizedBox(
@@ -46,14 +43,14 @@ class SettingContent extends StatelessWidget {
                         fontSize: 18.px,
                         fontWeight: FontWeight.w800),
                   ),
-                  const Spacer(),
+                 /* const Spacer(),
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
                         Icons.edit,
                         color: Colors.black,
                         size: 25.px,
-                      ))
+                      ))*/
                 ],
               ),
               SizedBox(
@@ -109,7 +106,7 @@ class SettingContent extends StatelessWidget {
                       width: 3.w,
                     ),
                     Text(
-                      'Computer Scientist',
+                      homeBloc.userModel!.work,
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w800,
@@ -233,7 +230,7 @@ class SettingContent extends StatelessWidget {
                         isDense: true,
                         isExpanded: true,
                         borderRadius: BorderRadius.circular(30.px),
-                        value: 1,
+                        value:blocListener.lang=='ar'? 2:1,
                         underline: const SizedBox(),
                         items: [
                           DropdownMenuItem(
@@ -257,7 +254,14 @@ class SettingContent extends StatelessWidget {
                             ),
                           ),
                         ],
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          bloc.add(ChangeLanguageEvent());
+                          if (value == 1) {
+                            value = 2;
+                          } else {
+                            value = 1;
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -383,7 +387,7 @@ class SettingContent extends StatelessWidget {
                         isDense: true,
                         isExpanded: true,
                         borderRadius: BorderRadius.circular(30.px),
-                        value: 1,
+                        value: 2,
                         underline: const SizedBox(),
                         items: [
                           DropdownMenuItem(
@@ -453,7 +457,7 @@ class SettingContent extends StatelessWidget {
                   ),
                   backgroundColor: Colors.white,
                   children: [
-                    Text(
+                   /* Text(
                       'FAQ Data',
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
@@ -484,7 +488,7 @@ class SettingContent extends StatelessWidget {
                         color: Colors.black,
                         fontSize: 18.px,
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),

@@ -14,6 +14,7 @@ class SettingView extends StatelessWidget {
         toolbarHeight: 4.h,
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.transparent,
+        title: CustomText(text: 'Settings',fontWeight: FontWeight.w800,fontSize: 20,),
       ),
       body: MultiBlocProvider(
         providers: [

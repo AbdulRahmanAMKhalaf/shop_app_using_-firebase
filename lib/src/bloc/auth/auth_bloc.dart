@@ -37,6 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
   TextEditingController emailController = TextEditingController();
+  TextEditingController workController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -65,13 +66,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       user = userCredential!.user;
       if (user != null) {
         emit(SaveDataLoading());
-        await fireStore.collection('users').doc(user!.uid).set({
+        await fireStore.collection('User').doc(user!.uid).set({
           'id': user!.uid,
           // Unique ID of the user
           'email': emailController.text,
-          'fullName': nameController.text,
+          'name': nameController.text,
           'phoneNumber': phoneNumberController.text,
           'createdAt': FieldValue.serverTimestamp(),
+          'work':workController.text
           // Timestamp of registration
         });
       }

@@ -15,7 +15,7 @@ class SkipButton extends StatelessWidget {
           textColor: AppColors.mainColor,
           borderRadius: 10.w,
           isText: true,
-          text: 'SKIP',
+          text: AppLocalizations.of(context)!.skip,
           padding: EdgeInsets.symmetric(horizontal: 7.w,),
           color: Colors.transparent,
           shadowColor: Colors.transparent,

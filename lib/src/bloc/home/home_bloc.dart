@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       // Step 3: Fetch the user's data from Firestore
       DocumentSnapshot<Map<String, dynamic>> userDoc =
           await FirebaseFirestore.instance
-              .collection('users')
+              .collection('User')
               .doc(event.uid) // Use the UID as the document ID
               .get();
 

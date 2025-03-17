@@ -113,6 +113,28 @@ class RegisterBody extends StatelessWidget {
                 height: 2,
               ),
               CustomTextFormField(
+                labelText: AppLocalizations.of(context)!.work,
+                controller: authBloc.workController,
+                keyboardType: TextInputType.text,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Required Field';
+                  } else {
+                    return null;
+                  }
+                },
+                hintText: '+962 770130018',
+                note: 'Contains:- country key - 9 numbers',
+                prefixIcon: Icon(
+                  Icons.phone,
+                  color: AppColors.mainColor,
+                  size: 25.px,
+                ),
+              ),
+              VerticalSpacing(
+                height: 2,
+              ),
+              CustomTextFormField(
                 labelText: AppLocalizations.of(context)!.email,
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'abood123@outlook.com',
@@ -192,123 +214,34 @@ class RegisterBody extends StatelessWidget {
                 ],
               ),
               VerticalSpacing(
-                height: 4,
+                height: 2,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: CustomButton(
-                  onPressed: () {
-                    if (authBloc.formKey.currentState!.validate() &&
-                        authBlocListener.checkTerms == true) {
-                      authBloc.add(RegisterEvent());
-                    }
-                  },
-                  shadowColor: authBlocListener.checkTerms == true
-                      ? AppColors.mainColor
-                      : Colors.transparent,
-                  color: authBlocListener.checkTerms == true
-                      ? AppColors.mainColor
-                      : AppColors.noteColor,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
-                  textSize: 20,
-                  elevation: 3.px,
-                  borderRadius: 15.px,
-                  isText: true,
-                  text: authBlocListener.checkTerms == true
-                      ? AppLocalizations.of(context)!.signUpNow
-                      : AppLocalizations.of(context)!.checkTerms,
-                ),
+              CustomButton(
+                onPressed: () {
+                  if (authBloc.formKey.currentState!.validate() &&
+                      authBlocListener.checkTerms == true) {
+                    authBloc.add(RegisterEvent());
+                  }
+                },
+                shadowColor: authBlocListener.checkTerms == true
+                    ? AppColors.mainColor
+                    : Colors.transparent,
+                color: authBlocListener.checkTerms == true
+                    ? AppColors.mainColor
+                    : AppColors.noteColor,
+                padding:
+                    EdgeInsets.symmetric(horizontal: 22.w, vertical: 1.5.h),
+                textSize: 20,
+                elevation: 3.px,
+                borderRadius: 15.px,
+                isText: true,
+                text: authBlocListener.checkTerms == true
+                    ? AppLocalizations.of(context)!.signUpNow
+                    : AppLocalizations.of(context)!.checkTerms,
               ),
               VerticalSpacing(
                 height: 3,
               ),
-            /*  Row(
-                children: [
-                  Flexible(
-                      child: Container(
-                    width: double.infinity,
-                    height: 1.px,
-                    color: AppColors.mainColor,
-                    margin: EdgeInsets.only(right: 3.w),
-                  )),
-                  CustomText(
-                    text: 'or register with',
-                    fontSize: 15,
-                    color: AppColors.noteColor,
-                  ),
-                  Flexible(
-                      child: Container(
-                    width: double.infinity,
-                    height: 1.px,
-                    color: AppColors.mainColor,
-                    margin: EdgeInsets.only(left: 3.w),
-                  )),
-                ],
-              ),
-              VerticalSpacing(
-                height: 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: AppColors.mainColor,
-                        content: CustomText(
-                          text: 'Coming Soon !',
-                          fontSize: 14,
-                          color: AppColors.whiteColor,
-                        ),
-                        duration: Duration(seconds: 2),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(3.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.px),
-                        border:
-                            Border.all(color: AppColors.mainColor, width: 2.px),
-                      ),
-                      child: CustomImage(
-                        height: 20.px,
-                        width: 20.px,
-                        assetPath: AppImages.google,
-                        isNetworkImage: false,
-                      ),
-                    ),
-                  ),
-                  HorizontalSpacing(width: 15),
-                  InkWell(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: AppColors.mainColor,
-                        content: CustomText(
-                          text: 'Coming Soon !',
-                          fontSize: 14,
-                          color: AppColors.whiteColor,
-                        ),
-                        duration: Duration(seconds: 2),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(3.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.px),
-                        border:
-                            Border.all(color: AppColors.mainColor, width: 2.px),
-                      ),
-                      child: CustomImage(
-                        height: 22.px,
-                        width: 22.px,
-                        assetPath: AppImages.faceBook,
-                        isNetworkImage: false,
-                      ),
-                    ),
-                  ),
-                ],
-              ),*/
               Divider(
                 color: AppColors.mainColor,
                 height: 3.h,
